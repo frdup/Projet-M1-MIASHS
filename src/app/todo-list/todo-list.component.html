@@ -1,0 +1,58 @@
+<section class="todoapp">
+  <button type="button" (click)="Dessiner()" id="bt">{{des}}</button>
+  <div  [hidden]="!show">
+    <div class="canvas">
+      <canvas #canvas id="canvas"></canvas>
+    </div>
+    <input type="button" value="Effacer" (click)="Erase()"/>
+    <input type="button" value="Enregistrer" (click)="enregistrerDessin()"/>
+  </div>
+  <header class="header">
+    <form (submit)="appendItems(newTodoInput.value); newTodoInput.value = ''">
+      <input  #newTodoInput
+              name        = "newTodoInput"
+              class       = "new-todo"
+              placeholder = "Que faire?"
+              autofocus />
+    </form>
+  </header>
+  <section class="main">
+    <input  class="toggle-all"
+            type="checkbox"
+            name="toggleAll"
+            (click)="toggleAllDone()"
+            [class.toggle-all] = "isAllDone"
+    />
+
+    <ul class="todo-list">
+
+      <li *ngFor="let item of getFiltereditems()" [class.completed]="compoItem.getisDone()" [class.editing] = "compoItem.isEditing" >
+      <app-todo-item #compoItem [data]="item">
+      </app-todo-item>
+      </li>
+
+    </ul>
+  </section>
+  <footer class="footer">
+    <span class="todo-count"><strong></strong> restantes :  {{ NbitemsUnchecked() }}</span>
+    <ul class="filters">
+      <li>
+        <a class="filterAll" (click) = "currentFilter = filterAll"
+
+           [class.selected] =  "currentFilter === filterAll" >Toutes</a>
+      </li>
+      <li>
+        <a class="filterActives" (click) = "currentFilter = UnDone"
+
+           [class.selected] =  "currentFilter === UnDone">Actives</a>
+      </li>
+      <li>
+        <a class="filterCompleted" (click) = "currentFilter = filterDone"
+           [class.selected] =  "currentFilter === filterDone">Complétées</a>
+      </li>
+    </ul>
+
+    <button class="clear-completed" (click)="removeDone()">Supprimer cochées</button>
+
+  </footer>
+</section>

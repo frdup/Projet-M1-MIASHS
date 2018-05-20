@@ -1,0 +1,46 @@
+<div class="view">
+  <input 	class			= "toggle"
+          type			= "checkbox"
+          name			= "fait"
+          [ngModel] = "getisDone()"
+          (ngModelChange) = "setDone($event)"
+  />
+
+  <label 	*ngIf="getisVideo(); else image_content" (click)="setIsEditing(true)">
+    <iframe width="450" height="250" [src]="safeVideoUrl" frameborder="0" allowfullscreen></iframe>
+  </label>
+
+  <ng-template #image_content>
+  <label 	*ngIf="getisImage(); else sound_content" (click)="setIsEditing(true)">
+    <img width="300" height="250" [src]="safeImageUrl">
+  </label>
+    </ng-template>
+
+  <ng-template #sound_content>
+    <label 	*ngIf="getisSound(); else other_content" (click)="setIsEditing(true)">
+      <audio class ="audio" [src]="safeSoundUrl" controls></audio>
+    </label>
+  </ng-template>
+
+  <ng-template #other_content>
+    <label class = "text" (click)="setIsEditing(true)">
+      {{ getLabel() }}
+    </label>
+  </ng-template>
+
+  <button class="destroy"
+          (click) = "remove()"
+
+  ></button>
+</div>
+
+<form (submit)="setLabel(newTextInput.value)">
+  <input  #newTextInput
+          name    = "newTextInput"
+          class   = "edit"
+          (blur) = "setLabel(newTextInput.value)"
+        [ngModel] = "getLabel()"
+
+  />
+
+</form>

@@ -1,0 +1,7 @@
+François Dupoirieux
+Mouad Merzoug
+
+Projet MIASHS M1 :
+Ajout de notes de types images / vidéos / sons / dessins 
+La TodoList prend en compte les url de vidéos Youtube et Dailymotion, les url d’images et de sons (mp3 et ogg). Il est possible de rajouter des dessins avec un canvas. 
+
